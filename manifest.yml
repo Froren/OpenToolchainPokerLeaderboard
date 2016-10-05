@@ -1,0 +1,8 @@
+applications:
+- path: .
+  memory: 64M
+  instances: 1
+  domain: mybluemix.net
+  name: otc-poker-leaderboard
+  host: otc-poker-leaderboard
+  disk_quota: 1024M
