@@ -13,7 +13,7 @@ app.set('views', './');
 app.use('/public', express.static(__dirname + '/public'));
 
 app.get('/', function(req, res) {
-	res.send('Hello ' + appEnv.url + " " + JSON.stringify(process.env, null, 3));
+	res.send('Hello ' + appEnv.url + " " + process.env.test);
 });
 
 // io.on('connection', function(socket) {
