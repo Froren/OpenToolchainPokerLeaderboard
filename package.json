@@ -4,6 +4,7 @@
   "description": "A leaderboard for otc-poker",
   "main": "index.js",
   "dependencies": {
+    "amqplib": "^0.4.2",
     "cfenv": "^1.0.3",
     "express": "^4.14.0",
     "hbs": "^4.0.1",

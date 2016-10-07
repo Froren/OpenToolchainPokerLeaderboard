@@ -1,0 +1,18 @@
+<html>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+
+    socket.on('boardUpdate', function(date, data) {
+        var output = "";
+
+        data.forEach(function(e) {
+            output += "name: " + e.name + " chips: " + e.chips + "<br>";
+        });
+
+        document.getElementById('boardInfo').innerHTML = date + '<br>' + output + '<br><br><br>' + document.getElementById('boardInfo').innerHTML;
+    });
+</script>
+
+<body><span id='boardInfo'></span></body>
+</html>
