@@ -25,7 +25,9 @@ io.on('connection', function(socket) {
     });
 });
 
-if (process.env.amqpUrl) {
+var amqpUrl = process.env.amqpUrl;
+
+if (amqpUrl) {
 
     //Connect to the rabbitmq instance
     amqp.connect(amqpUrl, function(err, conn) {
