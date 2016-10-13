@@ -16,6 +16,15 @@ app.get('/', function(req, res) {
     res.render('index.html');
 });
 
+var pastGames = [];
+
+io.on('connection', function(socket) {
+
+    pastGames.forEach(function(g) {
+        socket.emit('boardUpdate', g);
+    });
+});
+
 var amqpUrl = process.env.amqpUrl;
 
 if (amqpUrl) {
@@ -26,16 +35,16 @@ if (amqpUrl) {
                 channel.bindQueue(ok.queue, 'msg', '#');
                 channel.consume(ok.queue, function(msg) {
 
-                    var arr = JSON.parse(msg.content);
-                    var outputArray = arr.map(function(o) {
-                        return {name: o.name, chips: o.chips};
-                    });
+                    var gameObject = JSON.parse(msg.content);
+                    io.sockets.emit('boardUpdate', gameObject);
 
-                    outputArray.sort(function(a, b) {
-                        return b.chips - a.chips;
-                    });
+                    //Update array of past games
+                    pastGames.unshift(gameObject);
 
-                    io.sockets.emit('boardUpdate', (new Date()).toISOString(), outputArray);
+                    if (pastGames.length > 5) {
+                        pastGames.splice(5);
+                    }
+
                 }, {noAck: true});
             });
         });

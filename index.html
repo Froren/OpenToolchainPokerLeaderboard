@@ -3,14 +3,27 @@
 <script>
     var socket = io();
 
-    socket.on('boardUpdate', function(date, data) {
-        var output = "";
+    socket.on('boardUpdate', function(game) {
+        var output = "<b> Totals: <br>";
 
-        data.forEach(function(e) {
-            output += "name: " + e.name + " chips: " + e.chips + "<br>";
+        //timestamp, totals, players
+
+        game.totals.forEach(function(e) {
+            output += "name: " + e.name + " chips: " + e.chips + "<br>"
         });
 
-        document.getElementById('boardInfo').innerHTML = date + '<br>' + output + '<br><br><br>' + document.getElementById('boardInfo').innerHTML;
+        output += "</b>";
+
+        game.players.forEach(function(gameArray) {
+
+            gameArray.forEach(function(e) {
+                output += "name: " + e.name + " chips: " + e.chips + "<br>";
+            });
+
+            output += "<br><br>";
+        });
+
+        document.getElementById('boardInfo').innerHTML = game.timestamp + '<br>' + output + '<br><br><br><hr>' + document.getElementById('boardInfo').innerHTML;
     });
 </script>
 
