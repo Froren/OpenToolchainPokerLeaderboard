@@ -4,7 +4,7 @@
     var socket = io();
 
     socket.on('boardUpdate', function(game) {
-        var output = "<b> Totals: <br>";
+        var output = "<b> Totals <br>";
 
         //timestamp, totals, players
 
@@ -12,7 +12,7 @@
             output += "name: " + e.name + " chips: " + e.chips + "<br>"
         });
 
-        output += "</b>";
+        output += "</b><br>";
 
         game.players.forEach(function(gameArray) {
 
@@ -23,9 +23,13 @@
             output += "<br><br>";
         });
 
-        document.getElementById('boardInfo').innerHTML = game.timestamp + '<br>' + output + '<br><br><br><hr>' + document.getElementById('boardInfo').innerHTML;
+        document.getElementById('boardInfo').innerHTML = game.timestamp + '<br>' + output + '<br><hr>' + document.getElementById('boardInfo').innerHTML;
     });
 </script>
 
-<body><span id='boardInfo'></span></body>
+<body>
+    <div id='boardLayout'>
+    <span id='boardInfo'></span>
+    </div>
+</body>
 </html>
