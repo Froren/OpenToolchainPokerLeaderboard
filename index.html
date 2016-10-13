@@ -9,7 +9,7 @@
         //timestamp, totals, players
 
         game.totals.forEach(function(e) {
-            output += "name: " + e.name + " chips: " + e.chips + "<br>"
+            output += e.chips + "&emsp;&emsp;" + e.name + "<br>";
         });
 
         output += "</b><br>";
@@ -17,7 +17,7 @@
         game.players.forEach(function(gameArray) {
 
             gameArray.forEach(function(e) {
-                output += "name: " + e.name + " chips: " + e.chips + "<br>";
+                output += e.chips + "&emsp;&emsp;" + e.name + "<br>";
             });
 
             output += "<br><br>";
